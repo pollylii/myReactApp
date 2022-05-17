@@ -29,7 +29,9 @@ export default function NowPlaying(props) {
 
     // props.history.push(`/detail/${filmId}`) // 
 
-    history.push(`/detail/${filmId}`) //
+    history.push(`/detail/${filmId}`) //动态路由传参
+
+    // history.push({ pathname: '/detail', query: { filmId: filmId } })
   }
 
   return (
@@ -37,7 +39,7 @@ export default function NowPlaying(props) {
       <ul>
         {
           list.map(item =>
-            <li key={item.filmId} onClick={()=>handleChangePage(item.filmId)}>
+            <li key={item.filmId} onClick={() => handleChangePage(item.filmId)}>
               {item.name}
               {/* 声明式导航 */}
               {/* <NavLink to={'/detail' + item.filmId}>{item.name}</NavLink> */}
