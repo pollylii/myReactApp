@@ -1,12 +1,10 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios'
-import { useHistory } from 'react-router-dom';
-// import { NavLink } from 'react-router-dom'
+import { withRouter } from 'react-router-dom'
 
 
 
 export default function NowPlaying(props) {
-  console.log('props', props);
   const [list, setlist] = useState([])
   useEffect(() => {
     axios({
@@ -20,33 +18,28 @@ export default function NowPlaying(props) {
     })
   }, [])
 
-  const history = useHistory()
-
-  // 编程式导航
-  const handleChangePage = (filmId) => {
-
-    // window.location.href = "#/detail/" + filmId  // js原生
-
-    // props.history.push(`/detail/${filmId}`) // 
-
-    history.push(`/detail/${filmId}`) //动态路由传参
-
-    // history.push({ pathname: '/detail', query: { filmId: filmId } })
-  }
-
   return (
     <div>
-      <ul>
         {
           list.map(item =>
-            <li key={item.filmId} onClick={() => handleChangePage(item.filmId)}>
-              {item.name}
-              {/* 声明式导航 */}
-              {/* <NavLink to={'/detail' + item.filmId}>{item.name}</NavLink> */}
-            </li>
+            
+             <WithFilmItem key={item.filmId} {...item} />
           )
         }
-      </ul>
     </div>
   )
 }
+
+function FilmItem(props) {
+  let { name, filmId } = props
+
+
+  return <li onClick={() => {
+        props.history.push(`/detail/${filmId}`)
+      }}>
+        {name}
+        {/* <img src={poster} height='100px' width='100px' alt={name} /> */}
+      </li>
+}
+
+const WithFilmItem = withRouter(FilmItem)

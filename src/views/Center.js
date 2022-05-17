@@ -1,7 +1,15 @@
 import React from 'react'
+import { withRouter } from 'react-router-dom';
 
-export default function Center() {
+function Center(props) {
+  console.log('detail props', props);
   return (
-    <div>Center</div>
+    <div>
+      <div onClick={()=>{
+        props.history.push('/filmsorder')
+      }}>电影订单</div>
+    </div>
   )
 }
+
+export default withRouter(Center)
