@@ -1,6 +1,23 @@
-.tabActive{
+.tabActive {
     color: #ff5f16;
 }
-.tab ul li{
+
+.tabbar {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background: white;
+    height: 50px;
+    line-height: 50px;
+    text-align: center;
+}
+
+.tabbar ul {
+    display: flex;
     list-style: none;
+}
+
+.tabbar li {
+    flex: 1;
 }

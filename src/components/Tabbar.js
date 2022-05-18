@@ -5,7 +5,7 @@ import style from '../style/tabbar.module.css'
 
 export default function Tabbar() {
   return (
-    <div className={style.tab + ' aaa'}>
+    <div className={style.tabbar}>
       <ul>
         <li>
           <NavLink to='/films' activeClassName={style.tabActive}>电影</NavLink>
