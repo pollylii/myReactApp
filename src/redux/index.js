@@ -1,10 +1,14 @@
-import { combineReducers,createStore } from "redux";
+import { applyMiddleware, combineReducers,createStore } from "redux";
+import reduxThuunk from 'redux-thunk'
+import reduxPromise from 'redux-promise'
 import TabbarReducer from './reducers/TabbarReducer'
 import CityReducer from './reducers/CityReducer'
+import CinemasReducer from "./reducers/CinemasReducer";
 
 const reducer = combineReducers({
     TabbarReducer,
     CityReducer,
+    CinemasReducer,
 })
 //  redux 原理,封装简易redux
 // function createMyStore(reducer) {
@@ -30,6 +34,6 @@ const reducer = combineReducers({
 //         getState
 //     }
 // }
-const store = createStore(reducer)
+const store = createStore(reducer, applyMiddleware(reduxThuunk, reduxPromise))
 // const store = createMyStore(reducer)
 export default store

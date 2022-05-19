@@ -1,5 +1,8 @@
-function changeCity(){
-    return {type: 'change-city'}
+function changeCity(type,payload){
+    return {
+        type,
+        payload,
+    }
 }
 
 export {changeCity}
