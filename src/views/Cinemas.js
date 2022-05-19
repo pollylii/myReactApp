@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import store from '../redux'
 import getCinemaListAction from '../redux/action/getCinemaListAction'
 

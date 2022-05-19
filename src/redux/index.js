@@ -1,5 +1,5 @@
-import { applyMiddleware, combineReducers,createStore } from "redux";
-import reduxThuunk from 'redux-thunk'
+import { applyMiddleware, combineReducers,createStore,compose } from "redux";
+import reduxThunk from 'redux-thunk'
 import reduxPromise from 'redux-promise'
 import TabbarReducer from './reducers/TabbarReducer'
 import CityReducer from './reducers/CityReducer'
@@ -34,6 +34,10 @@ const reducer = combineReducers({
 //         getState
 //     }
 // }
-const store = createStore(reducer, applyMiddleware(reduxThuunk, reduxPromise))
 // const store = createMyStore(reducer)
+
+
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+const store = createStore(reducer,composeEnhancers(applyMiddleware(reduxThunk,reduxPromise)));
+
 export default store
