@@ -6,6 +6,8 @@ import Center from '../views/Center'
 import NotFound from '../views/NotFound'
 import Detail from '../views/Detail'
 import Login from '../views/Login'
+import City from '../views/City'
+
 
 function isAuth() {
     return localStorage.getItem("token")
@@ -24,6 +26,7 @@ export default class IndexRouter extends Component {
                         return isAuth() ? <Center {...props} /> : <Redirect to='/login'/>
                     }} />
                     <Route path="/login" component={Login} ></Route>
+                    <Route path="/city" component={City} ></Route>
 
                     {/* <Route path="/detail" component={Detail} ></Route> */}
                     <Route path="/detail/:filmId" component={Detail} ></Route>
