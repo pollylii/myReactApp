@@ -2,7 +2,7 @@ import React from 'react'
 import { withRouter } from 'react-router-dom';
 
 function Center(props) {
-  console.log('detail props', props);
+  // console.log('detail props', props);
   return (
     <div>
       <div onClick={()=>{
