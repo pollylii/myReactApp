@@ -199,7 +199,6 @@ useRef	 | 返回一个可变的 ref 对象
 ### redux 持久化
 ![react-redux模型图](./src/images/imgs/react-redux模型图.png)
 ![redux原理图](./src/images/imgs/redux原理图.png)
-![redux原理图](./src/images/imgs/redux原理图.png)
 ![redux原理图](./src/images/imgs/redux的原理和基本使用.png)
 
 
