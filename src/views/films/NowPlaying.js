@@ -34,41 +34,34 @@ export default function NowPlaying(props) {
 
 function FilmItem(props) {
   console.log('FilmItem', props)
-  let { filmId, poster, name, item, grade, actors, nation, runtime } = props
+  let { filmId,poster, name,item, grade, actors, nation, runtime } = props
+
 
   return <li onClick={() => {
     props.history.push(`/detail/${filmId}`)
   }} className={style.filmItem}>
     <div className={style.filmWrap}>
-      {/* 海报 */}
+      {/* img */}
       <div className={style.filmImg} >
         <img src={poster} alt={name}></img>
       </div>
       {/* 电影信息 */}
       <div className={style.filmInfo}>
-        <div className={style.filmName}>
-          {/* 影片名字 */}
-          <span className={style.name}>{name}</span>
-          {/* 2D/3D */}
-          <span className={style.item}>{item.name}</span>
-        </div>
-        <div className={style.filmGrade}>
-          <span className={style.labelCol}>观众评分：</span>
-          <span className={style.grade}>{grade}</span>
-          </div>
-        <div className={style.filmActors + ' ' + style.labelCol}>
+        <div className={style.filmName}>{name}{item.name}</div>
+        <div className={style.filmGrade}>观众评分：{grade}</div>
+        <div className={style.filmActors+''+style.infoCol}>
           主演：{
-            actors.map(actor =>
-              <span key={actor.name}>{actor.name}&nbsp;&nbsp;</span>
+            actors.map(actor=>
+            <span key={actor.name}>{actor.name}&nbsp;&nbsp;</span>
             )
           }
         </div>
-        <div className={style.filmDetail+' '+style.labelCol}>{nation}&nbsp;&nbsp;|&nbsp;&nbsp;{runtime}</div>
-
+        <div className={style.filmDetail}>{nation}&nbsp;&nbsp;|&nbsp;&nbsp;{runtime}</div>
+        
       </div>
       {/* 购买 */}
-      <div className={style.filmBuy} style={{ float: 'right', }}>
-        <Button type="dashed" size='small' style={{position: 'static',}}>购买</Button>
+      <div className={style.filmBuy} style={{float: 'right',}}>
+          <Button type="dashed" size='small'>购买</Button>
       </div>
     </div>
     {/* <img src={poster} height='100px' width='100px' alt={name} /> */}
