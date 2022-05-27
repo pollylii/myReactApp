@@ -1,78 +1,80 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect,useState } from 'react'
 import axios from 'axios'
-import { withRouter } from 'react-router-dom'
-import style from '../../style/filmI.module.css'
-import { Button } from 'antd'
+import { Image, List } from 'antd-mobile'
+// import style from '../../style/filmI.module.css'
 
 
 
 export default function NowPlaying(props) {
-  const [list, setlist] = useState([])
+  const [filmList, setFilmList] = useState([])
+
+  // const count = useRef(0)
+
+  // const loadMore = () => {
+  //   count.current++
+  //   setHasMore(false)
+  //   axios({
+  //     url: `https://m.maizuo.com/gateway?cityId=440300&pageNum=1&pageSize=10&type=1&k=1834624`,
+  //     headers: {
+  //       'X-Client-Info': '{"a":"3000","ch":"1002","v":"5.2.0","e":"1651907533991630639235073"}',
+  //       'X-Host': 'mall.film-ticket.film.list',
+  //     }
+  //   }).then(res => {
+  //     setFilmList([...filmList, ...res.data.data.films])
+  //     setHasMore(res.data.data.films.length > 0)
+  //     console.log('len', res.data.data.films.length);
+  //   })
+  // }
   useEffect(() => {
     axios({
-      url: 'https://m.maizuo.com/gateway?cityId=440300&pageNum=1&pageSize=10&type=1&k=1834624',
+      url: `https://m.maizuo.com/gateway?cityId=440300&pageNum=1&pageSize=10&type=1&k=1834624`,
       headers: {
         'X-Client-Info': '{"a":"3000","ch":"1002","v":"5.2.0","e":"1651907533991630639235073"}',
         'X-Host': 'mall.film-ticket.film.list',
       }
     }).then(res => {
-      setlist(res.data.data.films)
+      setFilmList(res.data.data.films)
     })
   }, [])
 
   return (
-    <ul className={style.filmsList}>
-      {
-        list.map(item =>
+    <div>
+      <List>
+        {
+          filmList.map(item => (
+            <List.Item key={item.filmId}
+              prefix={
+                <Image src={item.poster} width={80} />
+              }
+              description={
+                <div>
+                  <div>
+                    <span>{item.name}</span>
+                    <span>{item.filmType.name}</span>
+                  </div>
+                  <div>观众评分：{item.grade}</div>
+                  <div>
+                    主演：
+                    {/* {
+                    (item.actors) ?
+                      (item.actors).map(actor => <span key={actor.name + Math.random()} className={style.action}>{actor.name}&nbsp;&nbsp;</span>)
+                      : ''
+                    } */}
+                  </div>
+                  <div>
+                    <span>{item.nation}&nbsp;&nbsp;|&nbsp;&nbsp;</span>
+                    <span>{item.runtime + '分钟'}</span>
+                  </div>
+                </div>
+              }
+            >
+            </List.Item>)
+          )
+        }
+      </List>
+      {/* <InfiniteScroll loadMore={loadMore} hasMore={hasMore} /> */}
+    </div>
 
-          <WithFilmItem key={item.filmId} {...item} />
-        )
-      }
-    </ul>
   )
 }
 
-function FilmItem(props) {
-  console.log('FilmItem', props)
-  let { filmId, poster, name, item, grade, actors, nation, runtime } = props
-
-  return <li onClick={() => {
-    props.history.push(`/detail/${filmId}`)
-  }} className={style.filmItem}>
-    <div className={style.filmWrap}>
-      {/* 海报 */}
-      <div className={style.filmImg} >
-        <img src={poster} alt={name}></img>
-      </div>
-      {/* 电影信息 */}
-      <div className={style.filmInfo}>
-        <div className={style.filmName}>
-          {/* 影片名字 */}
-          <span className={style.name}>{name}</span>
-          {/* 2D/3D */}
-          <span className={style.item}>{item.name}</span>
-        </div>
-        <div className={style.filmGrade}>
-          <span className={style.labelCol}>观众评分：</span>
-          <span className={style.grade}>{grade}</span>
-          </div>
-        <div className={style.filmActors + ' ' + style.labelCol}>
-          主演：{
-            actors.map(actor =>
-              <span key={actor.name}>{actor.name}&nbsp;&nbsp;</span>
-            )
-          }
-        </div>
-        <div className={style.filmDetail+' '+style.labelCol}>{nation}&nbsp;&nbsp;|&nbsp;&nbsp;{runtime}</div>
-
-      </div>
-      {/* 购买 */}
-      <div className={style.filmBuy} style={{ float: 'right', }}>
-        <Button type="dashed" size='small' style={{position: 'static',}}>购买</Button>
-      </div>
-    </div>
-    {/* <img src={poster} height='100px' width='100px' alt={name} /> */}
-  </li>
-}
-
-const WithFilmItem = withRouter(FilmItem)

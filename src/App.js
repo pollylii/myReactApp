@@ -1,5 +1,5 @@
 import MRouter from "./router";
-import Tabbar from "./components/Tabbar";
+import MyTabbar from "./components/MyTabbar";
 // import store from "./redux"
 
 import React, { Component } from 'react'
@@ -23,7 +23,7 @@ class App extends Component {
     return (
       <div className="App">
         <MRouter>
-          {this.props.isShow && <Tabbar />}
+          {this.props.isShow && <MyTabbar />}
         </MRouter>
       </div>
     )
